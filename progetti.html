@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progetti — Andrei Vilau</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-brand">
+      Andrei <span class="nav-brand-accent">Vilau</span>
+      <span class="nav-brand-sep">/</span> Portfolio
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="pcto.html">PCTO</a></li>
+      <li><a href="educazione-civica.html">Ed. Civica</a></li>
+      <li><a href="progetti.html" class="active">Progetti</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a>
+    <a href="pcto.html">PCTO</a>
+    <a href="educazione-civica.html">Educazione Civica</a>
+    <a href="progetti.html" class="active">Progetti & Links</a>
+  </div>
+
+  <div class="page-content">
+
+    <!-- Hero pagina -->
+    <section style="padding:5rem 3.5rem 2rem;max-width:1120px;margin:0 auto;">
+      <div class="sect-header fade-up">
+        <span class="sh-num">04</span>
+        <span class="sh-line"></span>
+        <h1 class="sh-title">Progetti <span class="t-accent">&amp; Lavori</span></h1>
+      </div>
+      <p class="fade-up" style="font-size:13px;color:var(--muted2);max-width:640px;line-height:1.9;margin-bottom:0.5rem;transition-delay:0.05s">
+        Una raccolta dei lavori tecnici realizzati nel corso del triennio. Ogni progetto
+        nasce da una necessità concreta e viene sviluppato con un approccio professionale:
+        analisi dei requisiti, progettazione, implementazione e documentazione. I campi
+        di applicazione spaziano dallo sviluppo web alle reti, dalla robotica alla
+        programmazione orientata agli oggetti.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ============ GRIGLIA PROGETTI ============ -->
+    <section class="section">
+      <div class="progetti-grid">
+
+        <!-- ======== PROGETTO 1 — Vivaio ======== -->
+        <div class="progetto-card fade-up">
+          <div class="prog-preview">
+            <div class="prog-preview-grid"></div>
+            <img src="vivaio.png" alt="Screenshot Vivaio">
+            <div class="prog-preview-inner">
+              <span class="prog-preview-icon"></span>
+            </div>
+            <span class="prog-num">01</span>
+          </div>
+
+          <div class="progetto-body">
+            <span class="badge-stato badge-completo">✓ Completato</span>
+            <h3>Vivaio — Web Application</h3>
+            <p>
+              Applicazione web full-stack per la gestione di un vivaio, con sistema
+              di autenticazione utenti basato su sessioni PHP, pannello amministrativo
+              per la gestione del catalogo prodotti e carrello acquisti con persistenza
+              su database MySQL. L'interfaccia è completamente responsive e accessibile
+              anche da dispositivi mobili.
+            </p>
+            <p>
+              Il progetto include: registrazione e login sicuro con hash delle password,
+              gestione dei ruoli utente (admin / cliente), CRUD completo del catalogo
+              piante con immagini, sistema di ricerca e filtro per categoria, e
+              pagina di riepilogo ordine. Il codice è organizzato seguendo il pattern MVC.
+            </p>
+
+            <div class="progetto-pills">
+              <span class="pill pill-accent">HTML / CSS</span>
+              <span class="pill pill-accent">JavaScript</span>
+              <span class="pill pill-accent">PHP 8</span>
+              <span class="pill pill-accent">MySQL</span>
+              <span class="pill pill-default">MVC Pattern</span>
+              <span class="pill pill-default">Responsive</span>
+            </div>
+
+            <div class="progetto-actions">
+              <a href="http://vilauandrei.altervista.org/verifica.php" target="_blank" rel="noopener" class="btn-sm btn-sm-fill">
+                ↗ Apri Sito
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======== PROGETTO 2 — ABB Robotica ======== -->
+        <div class="progetto-card fade-up" style="transition-delay:0.08s">
+          <div class="prog-preview">
+            <div class="prog-preview-grid"></div>
+            <video controls autoplay muted loop>
+             <source src="RobotStudio.mp4" type="video/mp4">
+           </video>
+            <div class="prog-preview-inner">
+              <span class="prog-preview-icon"></span>
+              <span class="prog-preview-label">RobotStudio · Cella IRB 1200</span>
+            </div>
+            <span class="prog-num">02</span>
+          </div>
+
+          <div class="progetto-body">
+            <span class="badge-stato badge-completo">✓ Completato</span>
+            <h3>Robotica ABB — Pick &amp; Place</h3>
+            <p>
+              Progettazione e simulazione di una cella robotica industriale completa
+              con robot ABB IRB 1200. Il progetto simula un processo di pick &amp; place
+              in ambiente manifatturiero: il robot preleva pezzi da un nastro
+              trasportatore e li deposita in posizioni precise su una stazione di posa,
+              con rilevamento presenza pezzo tramite I/O digitali.
+            </p>
+            <p>
+              Il programma RAPID è strutturato con routine modulari, gestione delle
+              eccezioni di produzione, ottimizzazione delle traiettorie per ridurre
+              i tempi di ciclo e integrazione con un PLC virtuale per il coordinamento
+              dell'intera linea. Il progetto è documentato con schemi di layout e
+              analisi dei tempi di ciclo.
+            </p>
+
+            <div class="progetto-pills">
+              <span class="pill pill-accent">ABB RAPID</span>
+              <span class="pill pill-accent">RobotStudio</span>
+              <span class="pill pill-accent">Automazione</span>
+              <span class="pill pill-default">Pick &amp; Place</span>
+              <span class="pill pill-default">PLC Integration</span>
+              <span class="pill pill-default">Simulazione 3D</span>
+            </div>
+
+            <div class="progetto-actions">
+            </div>
+          </div>
+        </div>
+
+        <!-- ======== PROGETTO 3 — Rete LAN ======== -->
+        <div class="progetto-card fade-up" style="transition-delay:0.16s">
+          <div class="prog-preview">
+            <div class="prog-preview-grid"></div>
+            <img src="rete_aziendale.webp" alt="Rete LAN Aziendale">
+            <div class="prog-preview-inner">
+              <span class="prog-preview-icon"></span>
+              <span class="prog-preview-label">Cisco Packet Tracer · Topologia</span>
+            </div>
+            <span class="prog-num">03</span>
+          </div>
+
+          <div class="progetto-body">
+            <span class="badge-stato badge-completo">✓ Completato</span>
+            <h3>Rete LAN Aziendale — Cisco</h3>
+            <p>
+              Progettazione completa di un'infrastruttura di rete aziendale su
+              Cisco Packet Tracer. La topologia include una rete segmentata in
+              VLAN per reparto (Amministrazione, R&amp;D, Produzione, Guest),
+              routing dinamico OSPF tra sedi, Access Control List per la sicurezza
+              dei flussi di traffico e server centralizzati DHCP, DNS e HTTP.
+            </p>
+            <p>
+              Il progetto è corredato da un piano di indirizzamento IP completo
+              con subnetting VLSM, configurazione degli switch Layer 2 e Layer 3,
+              implementazione del protocollo STP per la ridondanza, e documentazione
+              tecnica con tabelle di routing e schema logico della rete.
+            </p>
+
+            <div class="progetto-pills">
+              <span class="pill pill-accent">Cisco IOS</span>
+              <span class="pill pill-accent">VLAN / Trunking</span>
+              <span class="pill pill-accent">OSPF</span>
+              <span class="pill pill-accent">ACL</span>
+              <span class="pill pill-default">DHCP / DNS</span>
+              <span class="pill pill-default">STP</span>
+              <span class="pill pill-default">Subnetting</span>
+            </div>
+
+            <div class="progetto-actions">
+              <a href="#" class="btn-sm btn-sm-ghost">📁 File .pkt</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======== PROGETTO 4 — Gestionale Python ======== -->
+        <div class="progetto-card fade-up" style="transition-delay:0.24s">
+          <div class="prog-preview">
+            <div class="prog-preview-grid"></div>
+            <img src="lost.png" alt="Gestionale Python">
+            <div class="prog-preview-inner">
+              <span class="prog-preview-icon"></span>
+              <span class="prog-preview-label">Python · Tkinter · Desktop App</span>
+            </div>
+            <span class="prog-num">04</span>
+          </div>
+
+          <div class="progetto-body">
+            <span class="badge-stato badge-progress">⏳ In sviluppo</span>
+            <h3>Lost&Found scolastico — Python</h3>
+            <p>
+              Applicazione desktop per la gestione di un magazzino aziendale,
+              sviluppata in Python 3 con interfaccia grafica Tkinter. Il software
+              consente la registrazione di articoli, il tracciamento dei movimenti
+              di carico e scarico, la gestione delle scorte minime con sistema
+              di allerta e la generazione di report periodici.
+            </p>
+            <p>
+              I dati vengono persistiti su file JSON con backup automatico, con
+              la possibilità di esportare reportistica in formato PDF tramite
+              la libreria ReportLab. Il progetto applica i principi della
+              programmazione orientata agli oggetti con classi separate per
+              la logica di business e la presentazione.
+            </p>
+
+            <div class="progetto-pills">
+              <span class="pill pill-accent">Python 3</span>
+              <span class="pill pill-accent">Tkinter</span>
+              <span class="pill pill-accent">OOP</span>
+              <span class="pill pill-default">JSON</span>
+              <span class="pill pill-default">ReportLab PDF</span>
+            </div>
+
+            <div class="progetto-actions">
+              <a href="#" class="btn-sm btn-sm-ghost">&lt;/&gt; GitHub</a>
+              <a href="#" class="btn-sm btn-sm-ghost">📄 README</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======== PROGETTO 5 — Slot libero ======== -->
+        <div class="progetto-card fade-up" style="transition-delay:0.32s">
+          <div class="prog-preview">
+            <div class="prog-preview-grid"></div>
+            <!--
+              ★ AGGIUNGI QUI UN ALTRO PROGETTO ★
+              Sostituisci l'icona e la label con il tuo progetto
+            -->
+            <div class="prog-preview-inner">
+              <span class="prog-preview-icon">🗂️</span>
+              <span class="prog-preview-label">Prossimo progetto · Slot libero</span>
+            </div>
+            <span class="prog-num">05</span>
+          </div>
+
+          <div class="progetto-body">
+            <span class="badge-stato badge-presto">In arrivo</span>
+            <h3>Progetto da Aggiungere</h3>
+            <p>
+              Questo slot è riservato per il prossimo progetto tecnico.
+              Inserisci qui il titolo, la descrizione, le tecnologie utilizzate
+              e i link al codice sorgente o alla documentazione.
+            </p>
+
+            <div class="progetto-pills">
+              <span class="pill pill-default">Tecnologia 1</span>
+              <span class="pill pill-default">Tecnologia 2</span>
+            </div>
+
+            <div class="progetto-actions">
+              <span class="btn-sm btn-sm-ghost" style="opacity:0.5;cursor:default;">Presto disponibile</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card aggiungi -->
+        <div class="add-project-card fade-up" style="transition-delay:0.4s">
+          <span class="add-icon">＋</span>
+          <p>
+            Slot libero per nuovi<br>progetti futuri.<br>
+            <span style="color:var(--accent);">
+              Duplica una card esistente<br>e personalizzala.
+            </span>
+          </p>
+        </div>
+
+      </div><!-- /progetti-grid -->
+
+     
+    </section>
+
+
+  </div>
+
+  <footer>
+    <div class="footer-brand">Andrei <span>Vilau</span></div>
+    <div class="footer-copy">Portfolio · Esame di Stato 2026</div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('navMobile');
+    const navbar = document.getElementById('navbar');
+    toggle.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
