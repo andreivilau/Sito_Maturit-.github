@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andrei Vilau — Accesso Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================
+       DESIGN SYSTEM — Andrei Vilau Portfolio
+       ============================================ */
+    :root {
+      --bg:            #06070f;
+      --surface:       #0b0c18;
+      --surface2:      #111228;
+      --surface3:      #181930;
+      --accent:        #4fffb0;
+      --accent-dim:    rgba(79,255,176,0.07);
+      --accent-border: rgba(79,255,176,0.20);
+      --accent2:       #7c9dff;
+      --gold:          #f0c040;
+      --white:         #eef0ff;
+      --muted:         #525470;
+      --muted2:        #767898;
+      --border:        rgba(238,240,255,0.06);
+      --border2:       rgba(238,240,255,0.10);
+      --font-display:  'Syne', sans-serif;
+      --font-body:     'DM Mono', monospace;
+      --radius:        6px;
+      --radius-lg:     14px;
+      --radius-xl:     20px;
+      --nav-h:         68px;
+      --shadow:        0 8px 40px rgba(0,0,0,0.4);
+      --shadow-accent: 0 0 40px rgba(79,255,176,0.08);
+      --error:         #ff6b7a;
+      --error-dim:     rgba(255,107,122,0.08);
+      --error-border:  rgba(255,107,122,0.20);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.75;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    /* ---- NAVBAR ---- */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3.5rem;
+      background: rgba(6,7,15,0.92);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      transition: box-shadow 0.3s;
+    }
+    .navbar.scrolled { box-shadow: 0 2px 40px rgba(0,0,0,0.5); border-bottom-color: var(--border2); }
+
+    .nav-brand {
+      font-family: var(--font-display);
+      font-size: 13px; font-weight: 800;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--white); text-decoration: none;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .nav-brand-accent { color: var(--accent); font-weight: 800; }
+    .nav-brand-sep { color: var(--muted); font-weight: 300; font-size: 10px; }
+
+    .nav-links {
+      display: flex; align-items: center;
+      gap: 0.1rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted2); text-decoration: none;
+      padding: 7px 16px; border-radius: var(--radius);
+      transition: color 0.25s, background 0.25s; font-weight: 400;
+    }
+    .nav-links a:hover { color: var(--white); background: var(--surface2); }
+    .nav-links a.active { color: var(--accent); background: var(--accent-dim); }
+
+    .nav-toggle {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .nav-toggle span { display: block; width: 22px; height: 1px; background: var(--white); transition: all 0.3s; }
+
+    /* ---- BACKGROUND EFFECTS ---- */
+    .hero-grid-bg {
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(79,255,176,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,255,176,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none; z-index: 0;
+    }
+
+    .hero-glow {
+      position: fixed;
+      top: 20%; right: -10%;
+      width: 600px; height: 600px;
+      background: radial-gradient(ellipse, rgba(79,255,176,0.05) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+    .hero-glow-left {
+      position: fixed;
+      bottom: 10%; left: -10%;
+      width: 500px; height: 500px;
+      background: radial-gradient(ellipse, rgba(124,157,255,0.04) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ---- PAGE WRAPPER ---- */
+    .page-content {
+      padding-top: var(--nav-h);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      padding-bottom: 4rem;
+    }
+
+    /* ---- LOGIN CONTAINER ---- */
+    .auth-wrapper {
+      width: 100%;
+      max-width: 480px;
+      padding: 2rem 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ---- HEADER SECTION ---- */
+    .auth-header {
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+    .auth-tag {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 6px 14px 6px 10px;
+      background: var(--surface2); border: 1px solid var(--border2);
+      border-radius: 100px; margin-bottom: 1.5rem; width: fit-content;
+      animation: fadeSlideDown 0.5s ease both;
+    }
+    .at-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(79,255,176,0.4); }
+      50% { opacity:0.7; box-shadow: 0 0 0 6px rgba(79,255,176,0); }
+    }
+    .at-text {
+      font-size: 10px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted2); font-weight: 400;
+    }
+
+    .auth-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 6vw, 54px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 0.75rem;
+      animation: fadeSlideDown 0.5s 0.06s ease both;
+    }
+    .auth-title .t-accent { color: var(--accent); }
+    .auth-title .t-outline {
+      -webkit-text-stroke: 1.5px rgba(238,240,255,0.25);
+      color: transparent;
+    }
+    .auth-subtitle {
+      font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted2);
+      animation: fadeSlideDown 0.5s 0.1s ease both;
+    }
+
+    /* ---- CARD ---- */
+    .auth-card {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      animation: fadeSlideUp 0.55s 0.15s ease both;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .auth-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-border), transparent);
+    }
+    .auth-card:focus-within {
+      border-color: var(--accent-border);
+      box-shadow: var(--shadow-accent);
+    }
+
+    /* ---- TABS ---- */
+    .auth-tabs {
+      display: flex;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 3px;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .auth-tab {
+      flex: 1;
+      padding: 9px 0;
+      font-family: var(--font-body);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      border: none;
+      background: transparent;
+      color: var(--muted2);
+      cursor: pointer;
+      border-radius: calc(var(--radius) - 1px);
+      transition: all 0.25s;
+      position: relative;
+      z-index: 1;
+    }
+    .auth-tab.active {
+      color: var(--bg);
+      background: var(--accent);
+    }
+    .auth-tab:not(.active):hover { color: var(--white); }
+
+    /* ---- FORM ELEMENTS ---- */
+    .form-group {
+      margin-bottom: 1.25rem;
+      animation: fadeSlideUp 0.4s ease both;
+    }
+    .form-label {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .form-input-wrap { position: relative; }
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+    }
+    .form-input::placeholder { color: var(--muted); }
+    .form-input:focus {
+      border-color: var(--accent-border);
+      background: var(--surface3);
+      box-shadow: 0 0 0 3px rgba(79,255,176,0.06);
+    }
+    .form-input.error {
+      border-color: var(--error-border);
+      box-shadow: 0 0 0 3px var(--error-dim);
+    }
+
+    .input-icon {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 14px;
+      pointer-events: none;
+      transition: color 0.25s;
+    }
+    .form-input:focus ~ .input-icon { color: var(--accent); }
+
+    .toggle-password {
+      position: absolute;
+      right: 14px; top: 50%; transform: translateY(-50%);
+      background: none; border: none;
+      color: var(--muted); cursor: pointer;
+      font-size: 11px; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 4px;
+      transition: color 0.25s; font-family: var(--font-body);
+    }
+    .toggle-password:hover { color: var(--accent); }
+
+    .form-hint {
+      margin-top: 6px;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .form-error {
+      margin-top: 6px;
+      font-size: 10px;
+      color: var(--error);
+      letter-spacing: 0.06em;
+      display: none;
+    }
+
+    /* ---- PASSWORD STRENGTH ---- */
+    .strength-bar {
+      display: flex;
+      gap: 4px;
+      margin-top: 8px;
+    }
+    .strength-seg {
+      flex: 1; height: 2px;
+      background: var(--border2);
+      border-radius: 2px;
+      transition: background 0.3s;
+    }
+    .strength-seg.weak   { background: var(--error); }
+    .strength-seg.medium { background: var(--gold); }
+    .strength-seg.strong { background: var(--accent); }
+    .strength-label {
+      font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--muted); margin-top: 5px;
+    }
+
+    /* ---- DIVIDER ---- */
+    .form-divider {
+      display: flex; align-items: center; gap: 16px;
+      margin: 1.5rem 0;
+    }
+    .form-divider::before, .form-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .form-divider span {
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); white-space: nowrap;
+    }
+
+    /* ---- BUTTONS ---- */
+    .btn-fill {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; width: 100%; padding: 13px 28px;
+      background: var(--accent); color: #06070f;
+      font-family: var(--font-body); font-size: 10px;
+      font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+      border-radius: var(--radius); border: none;
+      cursor: pointer; transition: all 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .btn-fill::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(rgba(255,255,255,0.1), transparent);
+      opacity: 0; transition: opacity 0.25s;
+    }
+    .btn-fill:hover {
+      background: #7affd0;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(79,255,176,0.25);
+    }
+    .btn-fill:hover::after { opacity: 1; }
+    .btn-fill:active { transform: translateY(0); }
+    .btn-fill:disabled {
+      opacity: 0.5; cursor: not-allowed;
+      transform: none; box-shadow: none;
+    }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; width: 100%; padding: 12px 28px;
+      background: transparent; color: var(--white);
+      font-family: var(--font-body); font-size: 10px;
+      font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+      border-radius: var(--radius); border: 1px solid var(--border2);
+      cursor: pointer; transition: all 0.25s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent-border);
+      color: var(--accent); background: var(--accent-dim);
+    }
+
+    /* ---- CHECKBOX ---- */
+    .form-check {
+      display: flex; align-items: flex-start; gap: 12px; cursor: pointer;
+      margin-bottom: 1.5rem;
+    }
+    .form-check input[type="checkbox"] { display: none; }
+    .check-box {
+      width: 16px; height: 16px; flex-shrink: 0;
+      background: var(--surface2); border: 1px solid var(--border2);
+      border-radius: 3px; margin-top: 2px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+    }
+    .form-check input:checked ~ .check-box {
+      background: var(--accent); border-color: var(--accent);
+    }
+    .check-mark { font-size: 10px; color: var(--bg); display: none; }
+    .form-check input:checked ~ .check-box .check-mark { display: block; }
+    .check-label { font-size: 11px; color: var(--muted2); line-height: 1.7; }
+    .check-label a { color: var(--accent); text-decoration: none; }
+    .check-label a:hover { text-decoration: underline; }
+
+    /* ---- FORGOT PASSWORD LINK ---- */
+    .form-footer-links {
+      display: flex; justify-content: flex-end;
+      margin-top: -0.5rem; margin-bottom: 1.5rem;
+    }
+    .link-small {
+      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted2); cursor: pointer;
+      background: none; border: none; font-family: var(--font-body);
+      transition: color 0.2s; padding: 0;
+    }
+    .link-small:hover { color: var(--accent); }
+
+    /* ---- SOCIAL BUTTONS ---- */
+    .social-btn {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; padding: 11px;
+      background: var(--surface2); border: 1px solid var(--border2);
+      border-radius: var(--radius); cursor: pointer;
+      transition: all 0.25s; flex: 1;
+    }
+    .social-btn:hover {
+      border-color: var(--accent-border);
+      background: var(--accent-dim);
+    }
+    .social-btn svg { width: 16px; height: 16px; }
+    .social-btn span {
+      font-size: 9px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted2);
+    }
+    .social-row { display: flex; gap: 10px; }
+
+    /* ============================================
+       OTP SCREEN
+       ============================================ */
+    .otp-screen { display: none; }
+    .otp-screen.active { display: block; animation: fadeSlideUp 0.45s ease both; }
+
+    .otp-icon-wrap {
+      width: 64px; height: 64px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 28px;
+      animation: fadeSlideDown 0.4s ease both;
+    }
+
+    .otp-email-preview {
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .otp-email-preview::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-border), transparent);
+    }
+    .otp-email-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .otp-email-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+    .otp-email-subject {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500;
+    }
+    .otp-email-from {
+      font-size: 9px; color: var(--muted); margin-left: auto;
+      letter-spacing: 0.06em;
+    }
+    .otp-code-display {
+      display: flex; gap: 10px; justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+    .otp-digit {
+      width: 44px; height: 52px;
+      background: var(--surface3);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 26px; font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 0;
+      animation: digitReveal 0.3s ease both;
+    }
+    @keyframes digitReveal {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .otp-validity {
+      font-size: 9px; color: var(--muted); letter-spacing: 0.1em;
+      text-transform: uppercase; text-align: center;
+    }
+    .otp-validity span { color: var(--gold); }
+
+    /* OTP Input boxes */
+    .otp-inputs {
+      display: flex; gap: 10px; justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .otp-input {
+      width: 52px; height: 60px;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 28px; font-weight: 800;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+      caret-color: var(--accent);
+    }
+    .otp-input:focus {
+      border-color: var(--accent-border);
+      background: var(--surface3);
+      box-shadow: 0 0 0 3px rgba(79,255,176,0.06);
+    }
+    .otp-input.filled {
+      border-color: var(--accent-border);
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+    .otp-input.error-state {
+      border-color: var(--error-border);
+      animation: shake 0.4s ease;
+    }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20% { transform: translateX(-5px); }
+      40% { transform: translateX(5px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
+
+    .otp-resend {
+      text-align: center; margin-top: 1rem;
+    }
+    .otp-resend p { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+    .otp-timer {
+      font-size: 11px; color: var(--muted2);
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .otp-timer-val { color: var(--gold); font-weight: 500; min-width: 28px; }
+    .btn-resend {
+      background: none; border: none; font-family: var(--font-body);
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); cursor: pointer; padding: 0;
+      transition: opacity 0.2s; display: none;
+    }
+    .btn-resend:hover { opacity: 0.7; }
+    .btn-resend.visible { display: inline; }
+
+    .otp-back {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted2); cursor: pointer; background: none; border: none;
+      font-family: var(--font-body); transition: color 0.2s; margin-bottom: 1.75rem;
+      padding: 0;
+    }
+    .otp-back:hover { color: var(--accent); }
+
+    /* ============================================
+       SUCCESS SCREEN
+       ============================================ */
+    .success-screen { display: none; }
+    .success-screen.active { display: block; animation: fadeSlideUp 0.45s ease both; }
+
+    .success-icon {
+      width: 72px; height: 72px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 30px;
+      position: relative;
+    }
+    .success-icon::after {
+      content: '';
+      position: absolute; inset: -8px;
+      border-radius: 50%;
+      border: 1px solid var(--accent-border);
+      animation: successRing 1.2s ease both;
+    }
+    @keyframes successRing {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .success-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; margin: 1.5rem 0;
+    }
+    .success-stat {
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      padding: 1rem;
+      text-align: center;
+    }
+    .ss-num {
+      font-family: var(--font-display);
+      font-size: 28px; font-weight: 800;
+      color: var(--accent); line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .ss-label {
+      font-size: 8px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted2);
+      margin-top: 4px; line-height: 1.5;
+    }
+
+    /* ============================================
+       ANIMATIONS
+       ============================================ */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-group:nth-child(1) { animation-delay: 0.18s; }
+    .form-group:nth-child(2) { animation-delay: 0.23s; }
+    .form-group:nth-child(3) { animation-delay: 0.28s; }
+    .form-group:nth-child(4) { animation-delay: 0.33s; }
+
+    /* ---- FOOTER ---- */
+    .auth-card-footer {
+      text-align: center;
+      margin-top: 1.75rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border);
+    }
+    .auth-card-footer p {
+      font-size: 11px; color: var(--muted2); line-height: 1.7;
+    }
+    .auth-card-footer a {
+      color: var(--accent); text-decoration: none; cursor: pointer;
+    }
+    .auth-card-footer a:hover { text-decoration: underline; }
+
+    /* ---- NOTIFICATION TOAST ---- */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.5rem;
+      display: flex; align-items: center; gap: 12px;
+      z-index: 9999;
+      transform: translateY(20px); opacity: 0;
+      transition: all 0.35s ease;
+      max-width: 340px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    .toast-dot.success { background: var(--accent); }
+    .toast-dot.error { background: var(--error); }
+    .toast-dot.info { background: var(--accent2); }
+    .toast-text { font-size: 11px; color: var(--white); line-height: 1.6; }
+    .toast-label {
+      font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); display: block; margin-bottom: 2px;
+    }
+
+    /* ---- LOADING STATE ---- */
+    .btn-loader {
+      display: inline-block;
+      width: 14px; height: 14px;
+      border: 2px solid rgba(6,7,15,0.3);
+      border-top-color: #06070f;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 640px) {
+      .navbar { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .auth-wrapper { padding: 1rem; }
+      .auth-card { padding: 2rem 1.5rem; }
+      .otp-digit { width: 38px; height: 46px; font-size: 22px; }
+      .otp-input { width: 44px; height: 52px; font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background effects -->
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-left"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-brand">
+      Andrei <span class="nav-brand-accent">Vilau</span>
+      <span class="nav-brand-sep">/</span> Portfolio
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="pcto.html">PCTO</a></li>
+      <li><a href="educazione-civica.html">Ed. Civica</a></li>
+      <li><a href="progetti.html">Progetti</a></li>
+      <li><a href="login.html" class="active">Accesso</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page-content">
+    <div class="auth-wrapper">
+
+      <!-- HEADER -->
+      <div class="auth-header" id="authHeader">
+        <div class="auth-tag" style="margin: 0 auto 1.5rem;">
+          <span class="at-dot"></span>
+          <span class="at-text">Portfolio · Area Riservata</span>
+        </div>
+        <h1 class="auth-title">
+          <span style="display:block; color: var(--white);">Area</span>
+          <span class="t-accent">Accesso</span>
+        </h1>
+        <p class="auth-subtitle" style="margin-top: 0.5rem;">Esame di Stato 2026</p>
+      </div>
+
+      <!-- ======= LOGIN / REGISTER CARD ======= -->
+      <div class="auth-card" id="authCard">
+
+        <!-- TABS -->
+        <div class="auth-tabs" id="authTabs">
+          <button class="auth-tab active" id="tabLogin" onclick="switchTab('login')">
+            ← Accedi
+          </button>
+          <button class="auth-tab" id="tabRegister" onclick="switchTab('register')">
+            Registrati →
+          </button>
+        </div>
+
+        <!-- ---- LOGIN FORM ---- -->
+        <div id="loginForm">
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">Indirizzo Email</label>
+            <div class="form-input-wrap">
+              <input type="email" class="form-input" id="loginEmail"
+                placeholder="nome@esempio.com" autocomplete="email">
+              <span class="input-icon">@</span>
+            </div>
+            <div class="form-error" id="loginEmailError">Inserisci un'email valida</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Password</label>
+            <div class="form-input-wrap">
+              <input type="password" class="form-input" id="loginPassword"
+                placeholder="••••••••" autocomplete="current-password" style="padding-right: 60px;">
+              <button class="toggle-password" type="button" onclick="togglePwd('loginPassword', this)">mostra</button>
+            </div>
+            <div class="form-error" id="loginPasswordError">Password non valida</div>
+          </div>
+
+          <div class="form-footer-links">
+            <button class="link-small" onclick="showForgot()">Password dimenticata?</button>
+          </div>
+
+          <button class="btn-fill" id="loginBtn" onclick="handleLogin()">
+            Accedi al Portfolio
+          </button>
+
+          <div class="form-divider"><span>oppure accedi con</span></div>
+
+          <div class="social-row">
+            <button class="social-btn" onclick="handleSocial('Google')">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+              </svg>
+              <span>Google</span>
+            </button>
+            <button class="social-btn" onclick="handleSocial('GitHub')">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="color: var(--muted2);">
+                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+              <span>GitHub</span>
+            </button>
+          </div>
+
+          <div class="auth-card-footer">
+            <p>Non hai un account? <a onclick="switchTab('register')">Registrati ora →</a></p>
+          </div>
+        </div>
+
+        <!-- ---- REGISTER FORM ---- -->
+        <div id="registerForm" style="display:none;">
+          <div class="form-group">
+            <label class="form-label" for="regName">Nome Completo</label>
+            <div class="form-input-wrap">
+              <input type="text" class="form-input" id="regName"
+                placeholder="Es: Mario Rossi" autocomplete="name">
+              <span class="input-icon">✦</span>
+            </div>
+            <div class="form-error" id="regNameError">Inserisci il tuo nome</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regEmail">Indirizzo Email</label>
+            <div class="form-input-wrap">
+              <input type="email" class="form-input" id="regEmail"
+                placeholder="nome@esempio.com" autocomplete="email">
+              <span class="input-icon">@</span>
+            </div>
+            <div class="form-error" id="regEmailError">Inserisci un'email valida</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regPassword">Crea Password</label>
+            <div class="form-input-wrap">
+              <input type="password" class="form-input" id="regPassword"
+                placeholder="Min. 8 caratteri" autocomplete="new-password"
+                oninput="checkStrength(this.value)" style="padding-right: 60px;">
+              <button class="toggle-password" type="button" onclick="togglePwd('regPassword', this)">mostra</button>
+            </div>
+            <div class="strength-bar" id="strengthBar">
+              <div class="strength-seg" id="s1"></div>
+              <div class="strength-seg" id="s2"></div>
+              <div class="strength-seg" id="s3"></div>
+              <div class="strength-seg" id="s4"></div>
+            </div>
+            <div class="strength-label" id="strengthLabel">Inserisci una password</div>
+            <div class="form-error" id="regPasswordError">Password troppo corta (min 8 caratteri)</div>
+          </div>
+
+          <label class="form-check">
+            <input type="checkbox" id="regTerms">
+            <div class="check-box"><span class="check-mark">✓</span></div>
+            <span class="check-label">
+              Accetto i <a href="#">Termini di Servizio</a> e la
+              <a href="#">Privacy Policy</a> del portfolio
+            </span>
+          </label>
+
+          <button class="btn-fill" id="registerBtn" onclick="handleRegister()">
+            Crea Account
+          </button>
+
+          <div class="auth-card-footer">
+            <p>Hai già un account? <a onclick="switchTab('login')">← Accedi</a></p>
+          </div>
+        </div>
+
+      </div><!-- /auth-card -->
+
+      <!-- ======= OTP SCREEN ======= -->
+      <div class="auth-card otp-screen" id="otpScreen">
+        <button class="otp-back" onclick="backToLogin()">← Torna al login</button>
+
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <div class="otp-icon-wrap">📧</div>
+          <h2 style="font-family: var(--font-display); font-size: 24px; font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 0.5rem;">
+            Verifica <span style="color: var(--accent);">OTP</span>
+          </h2>
+          <p style="font-size: 11px; color: var(--muted2); line-height: 1.7; max-width: 320px; margin: 0 auto;">
+            Abbiamo inviato un codice di verifica a<br>
+            <strong id="otpEmailDisplay" style="color: var(--white);"></strong>
+          </p>
+        </div>
+
+        <!-- Email preview simulata -->
+        <div class="otp-email-preview">
+          <div class="otp-email-header">
+            <div class="otp-email-dot"></div>
+            <span class="otp-email-subject">Codice di verifica · Portfolio</span>
+            <span class="otp-email-from">noreply@vilau.dev</span>
+          </div>
+          <p style="font-size: 10px; color: var(--muted2); margin-bottom: 1rem; letter-spacing: 0.04em;">
+            Il tuo codice OTP monouso per accedere al portfolio:
+          </p>
+          <div class="otp-code-display" id="otpCodeDisplay">
+            <!-- Digits populated by JS -->
+          </div>
+          <p class="otp-validity">
+            Valido per <span id="otpValidityTimer">10:00</span> minuti
+          </p>
+        </div>
+
+        <!-- Input boxes -->
+        <div class="auth-tabs" style="margin-bottom: 1rem;">
+          <span style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin: auto; font-weight: 500;">Inserisci il codice qui sotto</span>
+        </div>
+        <div class="otp-inputs" id="otpInputs">
+          <input class="otp-input" type="text" maxlength="1" inputmode="numeric" oninput="onOtpInput(this, 0)">
+          <input class="otp-input" type="text" maxlength="1" inputmode="numeric" oninput="onOtpInput(this, 1)">
+          <input class="otp-input" type="text" maxlength="1" inputmode="numeric" oninput="onOtpInput(this, 2)">
+          <input class="otp-input" type="text" maxlength="1" inputmode="numeric" oninput="onOtpInput(this, 3)">
+          <input class="otp-input" type="text" maxlength="1" inputmode="numeric" oninput="onOtpInput(this, 4)">
+          <input class="otp-input" type="text" maxlength="1" inputmode="numeric" oninput="onOtpInput(this, 5)">
+        </div>
+
+        <button class="btn-fill" id="verifyBtn" onclick="verifyOtp()" disabled>
+          Verifica Codice
+        </button>
+
+        <div class="otp-resend">
+          <p>Non hai ricevuto il codice?</p>
+          <span class="otp-timer">
+            Rinvia tra <span class="otp-timer-val" id="resendTimer">30</span>s
+          </span>
+          <button class="btn-resend" id="resendBtn" onclick="resendOtp()">Rinvia codice</button>
+        </div>
+      </div>
+
+      <!-- ======= SUCCESS SCREEN ======= -->
+      <div class="auth-card success-screen" id="successScreen">
+        <div style="text-align: center; padding: 1rem 0;">
+          <div class="success-icon">✓</div>
+          <h2 style="font-family: var(--font-display); font-size: 28px; font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 0.75rem;">
+            Accesso <span style="color: var(--accent);">Completato</span>
+          </h2>
+          <p style="font-size: 12px; color: var(--muted2); line-height: 1.85; max-width: 300px; margin: 0 auto 1.5rem;">
+            Identità verificata. Benvenuto nel portfolio di
+            <strong style="color: var(--white);">Andrei Vilau</strong>.
+          </p>
+
+          <div class="success-stats">
+            <div class="success-stat">
+              <div class="ss-num">2FA</div>
+              <div class="ss-label">Autenticazione<br>Completata</div>
+            </div>
+            <div class="success-stat">
+              <div class="ss-num" id="successTime">--:--</div>
+              <div class="ss-label">Ora di<br>Accesso</div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 0.5rem;">
+            <button class="btn-fill" onclick="goToPortfolio()">
+              ↗ Vai al Portfolio
+            </button>
+            <button class="btn-ghost" onclick="logout()">
+              Disconnetti
+            </button>
+          </div>
+
+          <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+            <div style="font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;">Sessione attiva</div>
+            <div style="background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 10px;">
+              <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; flex-shrink: 0;"></div>
+              <span style="font-size: 10px; color: var(--muted2);" id="sessionEmail"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /auth-wrapper -->
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast" id="toast">
+    <div class="toast-dot success" id="toastDot"></div>
+    <div class="toast-text">
+      <span class="toast-label" id="toastLabel"></span>
+      <span id="toastMsg"></span>
+    </div>
+  </div>
+
+  <script>
+    // ============================================
+    // STATE
+    // ============================================
+    let currentTab = 'login';
+    let generatedOtp = '';
+    let currentEmail = '';
+    let otpValidityInterval = null;
+    let resendInterval = null;
+    let validitySeconds = 600;
+    let resendSeconds = 30;
+
+    // ============================================
+    // NAVBAR SCROLL
+    // ============================================
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // ============================================
+    // TAB SWITCHING
+    // ============================================
+    function switchTab(tab) {
+      currentTab = tab;
+      document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
+      document.getElementById('registerForm').style.display = tab === 'register' ? 'block' : 'none';
+      document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
+      document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
+
+      // Update header
+      const title = document.querySelector('.auth-title');
+      if (tab === 'login') {
+        title.innerHTML = '<span style="display:block; color: var(--white);">Area</span><span class="t-accent">Accesso</span>';
+      } else {
+        title.innerHTML = '<span style="display:block; color: var(--white);">Crea</span><span class="t-accent">Account</span>';
+      }
+    }
+
+    // ============================================
+    // PASSWORD TOGGLE
+    // ============================================
+    function togglePwd(id, btn) {
+      const input = document.getElementById(id);
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = 'nascondi';
+      } else {
+        input.type = 'password';
+        btn.textContent = 'mostra';
+      }
+    }
+
+    // ============================================
+    // PASSWORD STRENGTH
+    // ============================================
+    function checkStrength(val) {
+      const segs = [document.getElementById('s1'), document.getElementById('s2'),
+                    document.getElementById('s3'), document.getElementById('s4')];
+      const label = document.getElementById('strengthLabel');
+      segs.forEach(s => { s.className = 'strength-seg'; });
+
+      if (!val) { label.textContent = 'Inserisci una password'; return; }
+
+      let score = 0;
+      if (val.length >= 8) score++;
+      if (/[A-Z]/.test(val)) score++;
+      if (/[0-9]/.test(val)) score++;
+      if (/[^a-zA-Z0-9]/.test(val)) score++;
+
+      const classes = ['weak','weak','medium','strong'];
+      const labels = ['Molto debole','Debole','Discreta','Forte 💪'];
+
+      for (let i = 0; i < score; i++) {
+        segs[i].classList.add(classes[score - 1]);
+      }
+      label.textContent = labels[score - 1] || 'Inserisci una password';
+      label.style.color = score <= 1 ? 'var(--error)' : score === 2 ? 'var(--gold)' : 'var(--accent)';
+    }
+
+    // ============================================
+    // VALIDATION HELPERS
+    // ============================================
+    function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+    function showError(id, show) {
+      const el = document.getElementById(id);
+      if (el) el.style.display = show ? 'block' : 'none';
+    }
+    function setInputError(id, error) {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('error', error);
+    }
+
+    // ============================================
+    // OTP GENERATOR
+    // ============================================
+    function generateOtp() {
+      return String(Math.floor(100000 + Math.random() * 900000));
+    }
+
+    // ============================================
+    // HANDLE LOGIN
+    // ============================================
+    function handleLogin() {
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      let valid = true;
+
+      if (!isEmail(email)) {
+        setInputError('loginEmail', true);
+        showError('loginEmailError', true);
+        valid = false;
+      } else {
+        setInputError('loginEmail', false);
+        showError('loginEmailError', false);
+      }
+
+      if (password.length < 6) {
+        setInputError('loginPassword', true);
+        showError('loginPasswordError', true);
+        valid = false;
+      } else {
+        setInputError('loginPassword', false);
+        showError('loginPasswordError', false);
+      }
+
+      if (!valid) return;
+
+      // Simulate loading
+      const btn = document.getElementById('loginBtn');
+      btn.innerHTML = '<span class="btn-loader"></span> Invio OTP...';
+      btn.disabled = true;
+
+      currentEmail = email;
+
+      setTimeout(() => {
+        btn.innerHTML = 'Accedi al Portfolio';
+        btn.disabled = false;
+        showOtpScreen(email);
+      }, 1400);
+    }
+
+    // ============================================
+    // HANDLE REGISTER
+    // ============================================
+    function handleRegister() {
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPassword').value;
+      const terms = document.getElementById('regTerms').checked;
+      let valid = true;
+
+      if (!name) { setInputError('regName', true); showError('regNameError', true); valid = false; }
+      else { setInputError('regName', false); showError('regNameError', false); }
+
+      if (!isEmail(email)) { setInputError('regEmail', true); showError('regEmailError', true); valid = false; }
+      else { setInputError('regEmail', false); showError('regEmailError', false); }
+
+      if (password.length < 8) { setInputError('regPassword', true); showError('regPasswordError', true); valid = false; }
+      else { setInputError('regPassword', false); showError('regPasswordError', false); }
+
+      if (!terms) {
+        showToast('Attenzione', 'Devi accettare i termini per continuare', 'error');
+        return;
+      }
+      if (!valid) return;
+
+      const btn = document.getElementById('registerBtn');
+      btn.innerHTML = '<span class="btn-loader"></span> Creazione account...';
+      btn.disabled = true;
+
+      currentEmail = email;
+
+      setTimeout(() => {
+        btn.innerHTML = 'Crea Account';
+        btn.disabled = false;
+        showToast('Account creato', `Registrazione completata per ${email}`, 'success');
+        showOtpScreen(email);
+      }, 1600);
+    }
+
+    // ============================================
+    // SOCIAL LOGIN
+    // ============================================
+    function handleSocial(provider) {
+      showToast('Reindirizzamento', `Accesso con ${provider} in corso...`, 'info');
+    }
+
+    // ============================================
+    // FORGOT PASSWORD
+    // ============================================
+    function showForgot() {
+      const email = document.getElementById('loginEmail').value.trim();
+      if (email && isEmail(email)) {
+        showToast('Email inviata', `Link di recupero inviato a ${email}`, 'success');
+      } else {
+        showToast('Campo richiesto', 'Inserisci prima la tua email', 'error');
+        document.getElementById('loginEmail').focus();
+      }
+    }
+
+    // ============================================
+    // OTP SCREEN
+    // ============================================
+    function showOtpScreen(email) {
+      generatedOtp = generateOtp();
+
+      // Hide auth card, show otp
+      document.getElementById('authCard').style.display = 'none';
+      document.getElementById('authHeader').style.display = 'none';
+
+      const otpScreen = document.getElementById('otpScreen');
+      otpScreen.classList.add('active');
+
+      // Display email
+      const shortened = email.replace(/(.{2}).*@/, '$1***@');
+      document.getElementById('otpEmailDisplay').textContent = shortened;
+
+      // Render OTP digits in "email"
+      const display = document.getElementById('otpCodeDisplay');
+      display.innerHTML = '';
+      generatedOtp.split('').forEach((d, i) => {
+        const el = document.createElement('div');
+        el.className = 'otp-digit';
+        el.textContent = d;
+        el.style.animationDelay = `${i * 0.06}s`;
+        display.appendChild(el);
+      });
+
+      // Reset inputs
+      document.querySelectorAll('.otp-input').forEach(inp => {
+        inp.value = ''; inp.className = 'otp-input';
+      });
+      document.getElementById('verifyBtn').disabled = true;
+
+      // Start validity timer (10 min)
+      validitySeconds = 600;
+      clearInterval(otpValidityInterval);
+      otpValidityInterval = setInterval(() => {
+        validitySeconds--;
+        const m = Math.floor(validitySeconds / 60).toString().padStart(2, '0');
+        const s = (validitySeconds % 60).toString().padStart(2, '0');
+        document.getElementById('otpValidityTimer').textContent = `${m}:${s}`;
+        if (validitySeconds <= 0) {
+          clearInterval(otpValidityInterval);
+          document.getElementById('otpValidityTimer').textContent = 'Scaduto';
+          document.getElementById('otpValidityTimer').style.color = 'var(--error)';
+        }
+      }, 1000);
+
+      // Start resend timer
+      startResendTimer();
+
+      showToast('OTP Inviato', `Codice inviato a ${shortened}`, 'success');
+    }
+
+    function backToLogin() {
+      document.getElementById('otpScreen').classList.remove('active');
+      document.getElementById('authCard').style.display = 'block';
+      document.getElementById('authHeader').style.display = 'block';
+      clearInterval(otpValidityInterval);
+      clearInterval(resendInterval);
+    }
+
+    // ============================================
+    // OTP INPUT HANDLING
+    // ============================================
+    function onOtpInput(input, index) {
+      const inputs = document.querySelectorAll('.otp-input');
+      const val = input.value.replace(/\D/g, '');
+      input.value = val;
+
+      if (val) {
+        input.classList.add('filled');
+        if (index < 5) inputs[index + 1].focus();
+      } else {
+        input.classList.remove('filled');
+      }
+
+      // Check if all filled
+      const allFilled = [...inputs].every(i => i.value.length === 1);
+      document.getElementById('verifyBtn').disabled = !allFilled;
+    }
+
+    // Handle backspace
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace') {
+        const inputs = document.querySelectorAll('.otp-input');
+        inputs.forEach((inp, i) => {
+          if (document.activeElement === inp && !inp.value && i > 0) {
+            inputs[i - 1].focus();
+          }
+        });
+      }
+    });
+
+    // ============================================
+    // VERIFY OTP
+    // ============================================
+    function verifyOtp() {
+      const inputs = document.querySelectorAll('.otp-input');
+      const entered = [...inputs].map(i => i.value).join('');
+
+      const btn = document.getElementById('verifyBtn');
+      btn.innerHTML = '<span class="btn-loader"></span> Verifica...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        if (entered === generatedOtp) {
+          clearInterval(otpValidityInterval);
+          clearInterval(resendInterval);
+          showSuccessScreen();
+        } else {
+          inputs.forEach(i => i.classList.add('error-state'));
+          setTimeout(() => inputs.forEach(i => i.classList.remove('error-state')), 500);
+          showToast('Codice errato', 'Il codice inserito non è corretto', 'error');
+          btn.innerHTML = 'Verifica Codice';
+          btn.disabled = false;
+        }
+      }, 900);
+    }
+
+    // ============================================
+    // RESEND TIMER
+    // ============================================
+    function startResendTimer() {
+      resendSeconds = 30;
+      const timerEl = document.getElementById('resendTimer');
+      const timerWrap = document.querySelector('.otp-timer');
+      const resendBtn = document.getElementById('resendBtn');
+
+      timerWrap.style.display = 'inline-flex';
+      resendBtn.classList.remove('visible');
+
+      clearInterval(resendInterval);
+      resendInterval = setInterval(() => {
+        resendSeconds--;
+        timerEl.textContent = resendSeconds + 's';
+        if (resendSeconds <= 0) {
+          clearInterval(resendInterval);
+          timerWrap.style.display = 'none';
+          resendBtn.classList.add('visible');
+        }
+      }, 1000);
+    }
+
+    function resendOtp() {
+      generatedOtp = generateOtp();
+
+      const display = document.getElementById('otpCodeDisplay');
+      display.innerHTML = '';
+      generatedOtp.split('').forEach((d, i) => {
+        const el = document.createElement('div');
+        el.className = 'otp-digit';
+        el.textContent = d;
+        el.style.animationDelay = `${i * 0.06}s`;
+        display.appendChild(el);
+      });
+
+      document.querySelectorAll('.otp-input').forEach(inp => {
+        inp.value = ''; inp.classList.remove('filled');
+      });
+      document.getElementById('verifyBtn').disabled = true;
+
+      // Reset validity
+      validitySeconds = 600;
+      clearInterval(otpValidityInterval);
+      otpValidityInterval = setInterval(() => {
+        validitySeconds--;
+        const m = Math.floor(validitySeconds / 60).toString().padStart(2,'0');
+        const s = (validitySeconds % 60).toString().padStart(2,'0');
+        document.getElementById('otpValidityTimer').textContent = `${m}:${s}`;
+      }, 1000);
+      document.getElementById('otpValidityTimer').style.color = 'var(--gold)';
+
+      startResendTimer();
+      showToast('OTP Rinviato', 'Nuovo codice generato e inviato', 'success');
+    }
+
+    // ============================================
+    // SUCCESS SCREEN
+    // ============================================
+    function showSuccessScreen() {
+      document.getElementById('otpScreen').classList.remove('active');
+
+      const now = new Date();
+      const hh = now.getHours().toString().padStart(2, '0');
+      const mm = now.getMinutes().toString().padStart(2, '0');
+      document.getElementById('successTime').textContent = `${hh}:${mm}`;
+      document.getElementById('sessionEmail').textContent = currentEmail;
+
+      const ss = document.getElementById('successScreen');
+      ss.classList.add('active');
+
+      showToast('Accesso eseguito', 'Autenticazione completata con successo', 'success');
+    }
+
+    function goToPortfolio() {
+      showToast('Reindirizzamento', 'Caricamento portfolio in corso...', 'info');
+      setTimeout(() => window.location.href = 'index.html', 1200);
+    }
+
+    function logout() {
+      document.getElementById('successScreen').classList.remove('active');
+      document.getElementById('authCard').style.display = 'block';
+      document.getElementById('authHeader').style.display = 'block';
+      document.getElementById('loginEmail').value = '';
+      document.getElementById('loginPassword').value = '';
+      switchTab('login');
+      currentEmail = '';
+      showToast('Disconnesso', 'Sessione terminata correttamente', 'info');
+    }
+
+    // ============================================
+    // TOAST
+    // ============================================
+    let toastTimeout;
+    function showToast(label, msg, type = 'success') {
+      const toast = document.getElementById('toast');
+      const dot = document.getElementById('toastDot');
+      document.getElementById('toastLabel').textContent = label;
+      document.getElementById('toastMsg').textContent = msg;
+
+      dot.className = 'toast-dot ' + type;
+
+      clearTimeout(toastTimeout);
+      toast.classList.add('show');
+      toastTimeout = setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    // ============================================
+    // FOCUS FIRST INPUT ON LOAD
+    // ============================================
+    window.addEventListener('load', () => {
+      document.getElementById('loginEmail').focus();
+    });
+  </script>
+</body>
+</html>
