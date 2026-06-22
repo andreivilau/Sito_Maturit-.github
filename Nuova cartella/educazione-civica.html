@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educazione Civica — Andrei Vilau</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="noise" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-brand">
+      Andrei <span class="nav-brand-accent">Vilau</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="fsl.html">FSL</a></li>
+      <li><a href="educazione-civica.html" class="active">Ed. Civica</a></li>
+      <li><a href="progetti.html">Progetti</a></li>
+    </ul>
+    <div class="nav-status">
+      <span class="status-dot"></span>
+      <span>maturità_2026</span>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a>
+    <a href="fsl.html">FSL · Esperienze</a>
+    <a href="educazione-civica.html" class="active">Educazione Civica</a>
+    <a href="progetti.html">Progetti</a>
+  </div>
+
+  <div class="page-content">
+
+    <section class="page-hero">
+      <div class="sect-header reveal">
+        <span class="sh-tag">Civica</span>
+        <h1 class="sh-title">Educazione <span class="t-accent">Civica</span></h1>
+      </div>
+
+      <div class="civica-intro reveal" style="transition-delay:0.05s">
+        <p>
+          L'<strong>Educazione Civica</strong> al triennio non è "un'ora in più": sono almeno 33 ore l'anno
+          su Costituzione, sostenibilità e cittadinanza digitale. Per noi dell'informatica ha senso
+          collegarla al mondo tech — diritti online, GDPR, e-waste, sicurezza sul lavoro quando starai
+          ore al PC. Qui riassumo cosa ho studiato, con le mie parole.
+        </p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <div class="accordion">
+
+        <article class="accordion-item reveal">
+          <button class="accordion-trigger" type="button">
+            <div>
+              <span class="module-year-badge">Asse 1 · Triennio</span>
+              <h3>Costituzione e ordinamento <span>della Repubblica</span></h3>
+            </div>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-content">
+              <p>
+                Abbiamo analizzato la Costituzione del '48 partendo dai Principi Fondamentali (artt. 1–12):
+                lavoro, uguaglianza, libertà. Poi come si divide il potere — Parlamento, Governo, magistratura —
+                e il ruolo del Presidente e della Corte Costituzionale.
+              </p>
+              <p>
+                Da informatici il link è naturale: privacy, comunicazioni, libertà di espressione oggi passano
+                anche dal digitale (art. 15 e 21, estesi al mondo online). Non è roba lontana dal nostro lavoro.
+              </p>
+              <div class="norm-quote">
+                <p>
+                  "La Repubblica è fondata sul lavoro. La sovranità appartiene al popolo,
+                  che la esercita nelle forme e nei limiti della Costituzione."
+                  — Art. 1, Costituzione italiana
+                </p>
+              </div>
+              <div class="civica-skills">
+                <span class="pill pill-accent">Principi fondamentali</span>
+                <span class="pill pill-accent">Democrazia</span>
+                <span class="pill pill-blue">Separazione poteri</span>
+                <span class="pill pill-default">Corte Costituzionale</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item reveal" style="transition-delay:0.08s">
+          <button class="accordion-trigger" type="button">
+            <div>
+              <span class="module-year-badge">Asse 2 · Triennio</span>
+              <h3>Sostenibilità e <span>Agenda 2030</span></h3>
+            </div>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-content">
+              <p>
+                I 17 Obiettivi ONU del 2030: li abbiamo visti non solo come slide, ma collegati al nostro settore.
+                Goal 7 (energia pulita), 9 (innovazione e infrastrutture), 13 (clima) — tutti toccano l'ICT.
+              </p>
+              <p>
+                Data center che consumano tantissima energia, e-waste che cresce ogni anno, dispositivi
+                che butti dopo due anni. Abbiamo parlato di riparabilità, software libero, cloud vs server
+                in casa — scelte che fanno la differenza anche da tecnici.
+              </p>
+              <div class="norm-quote">
+                <p>
+                  "Sviluppo sostenibile: soddisfare i bisogni di oggi senza rovinare le risorse
+                  a chi viene dopo." — Rapporto Brundtland, 1987
+                </p>
+              </div>
+              <div class="civica-skills">
+                <span class="pill pill-accent">SDGs 2030</span>
+                <span class="pill pill-accent">Green ICT</span>
+                <span class="pill pill-blue">E-waste</span>
+                <span class="pill pill-default">Economia circolare</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item reveal" style="transition-delay:0.16s">
+          <button class="accordion-trigger" type="button">
+            <div>
+              <span class="module-year-badge">Asse 3 · Triennio</span>
+              <h3>Cittadinanza digitale <span>e privacy</span></h3>
+            </div>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-content">
+              <p>
+                DigComp 2.2, GDPR, consenso informato, diritto all'oblio — roba che senti nominare
+                quando fai un sito e chiedi dati agli utenti. Ho capito perché un cookie banner non è
+                "decorazione" e cosa rischi se tratti i dati come ti pare.
+              </p>
+              <p>
+                Anche fake news, deepfake, filter bubble e un po' di etica sull'AI: bias, decisioni
+                automatiche, trasparenza. Da futuri tecnici conviene pensarci prima di buttar fuori codice.
+              </p>
+              <div class="norm-quote">
+                <p>
+                  "Ogni individuo ha diritto alla protezione dei dati personali che lo riguardano."
+                  — Carta dei Diritti Fondamentali UE, art. 8
+                </p>
+              </div>
+              <div class="civica-skills">
+                <span class="pill pill-accent">GDPR</span>
+                <span class="pill pill-accent">DigComp 2.2</span>
+                <span class="pill pill-blue">Fake news</span>
+                <span class="pill pill-default">Etica AI</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="accordion-item reveal" style="transition-delay:0.24s">
+          <button class="accordion-trigger" type="button">
+            <div>
+              <span class="module-year-badge">Trasversale</span>
+              <h3>Diritto del lavoro <span>e sicurezza</span></h3>
+            </div>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-content">
+              <p>
+                Contratti (indeterminato, determinato, apprendistato, tirocinio), diritti e doveri
+                del lavoratore — partendo dagli artt. 35–40 della Costituzione. Per noi conta anche
+                il D.Lgs. 81/2008: rischi, RSPP, RLS, formazione obbligatoria.
+              </p>
+              <p>
+                E i lavori con videoterminali (VDT): posture, pause, schermo — cioè quello che farai
+                se lavori in ufficio tech. Collegato alle esperienze FSL: in fabbrica o in stage
+                la sicurezza non è opzionale.
+              </p>
+              <div class="norm-quote">
+                <p>
+                  "Il datore di lavoro adotta le misure per la salute e sicurezza dei lavoratori."
+                  — D.Lgs. 81/2008, art. 15
+                </p>
+              </div>
+              <div class="civica-skills">
+                <span class="pill pill-accent">D.Lgs. 81/2008</span>
+                <span class="pill pill-accent">Contratti</span>
+                <span class="pill pill-blue">Sicurezza VDT</span>
+                <span class="pill pill-default">Diritti lavoratore</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="footer-brand">Andrei <span>Vilau</span></div>
+    <div class="footer-copy">Esame di Maturità 2026</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
