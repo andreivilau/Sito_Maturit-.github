@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FSL — Andrei Vilau</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="noise" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-brand">
+      Andrei <span class="nav-brand-accent">Vilau</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="fsl.html" class="active">FSL</a></li>
+      <li><a href="educazione-civica.html">Ed. Civica</a></li>
+      <li><a href="progetti.html">Progetti</a></li>
+    </ul>
+    <div class="nav-status">
+      <span class="status-dot"></span>
+      <span>maturità_2026</span>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">Home</a>
+    <a href="fsl.html" class="active">FSL · Esperienze</a>
+    <a href="educazione-civica.html">Educazione Civica</a>
+    <a href="progetti.html">Progetti</a>
+  </div>
+
+  <div class="page-content">
+
+    <section class="page-hero">
+      <div class="sect-header reveal">
+        <span class="sh-tag">FSL</span>
+        <h1 class="sh-title">Formazione <span class="t-accent">Scuola-Lavoro</span></h1>
+        <p class="sh-sub">
+          FSL = le ore che passi fuori dalla classe normale e ti ritrovi a fare cose vere:
+          inglese a Dublino, robot ABB con certificazione, simulazioni che sembrano una fabbrica.
+          Qui racconto cosa ho fatto e metto le foto.
+        </p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <div class="fsl-cards">
+
+        <!-- DUBLINO -->
+        <article class="fsl-card reveal">
+          <div class="fsl-card-inner">
+            <div class="fsl-card-text">
+              <div class="fsl-card-num">01</div>
+              <span class="fsl-badge">FSL all'estero</span>
+              <h3>Soggiorno studio<br>a Dublino, Irlanda</h3>
+
+              <p class="meta">
+                Dublino, Irlanda
+                <span class="meta-sep">·</span>
+                2 settimane
+                <span class="meta-sep">·</span>
+                A.S. 2024/25
+              </p>
+
+              <p class="desc-p">
+                Due settimane in Irlanda con la scuola: la mattina corso di inglese con prof madrelingua,
+                il pomeriggio giro in città o escursioni. Classe mista con altri studenti del nostro istituto
+                e anche ragazzi di altre nazionalità — quindi o ti sforzi a parlare, o resti muto (ho scelto la prima).
+              </p>
+              <p class="desc-p">
+                Le lezioni erano su grammatica, speaking e listening. Fuori dall'aula ho dovuto gestirmi da solo:
+                fare la spesa, capire le indicazioni, ordinare al bar senza passare all'italiano. Sembra banale,
+                ma ti sblocca parecchio.
+              </p>
+              <p class="desc-p">
+                Tornato a casa mi sentivo più sicuro a parlare inglese. Ho anche ottenuto la certificazione B1 —
+                non è fluentissimo, ma almeno non panico quando devo scrivere una mail in inglese.
+              </p>
+
+              <div class="fsl-highlight">
+                <p>
+                  "A Dublino ho capito che l'inglese si impara parlando, non solo facendo esercizi sul libro.
+                  Due settimane lì valgono mesi di teoria."
+                </p>
+              </div>
+
+              <p class="fsl-skills-label">Cosa ho imparato</p>
+              <div class="fsl-skills">
+                <span class="pill pill-accent">Inglese</span>
+                <span class="pill pill-accent">Comunicazione</span>
+                <span class="pill pill-accent">Autonomia</span>
+                <span class="pill pill-accent">Adattamento</span>
+                <span class="pill pill-blue">Lavoro di squadra</span>
+              </div>
+            </div>
+
+            <div class="fsl-card-photos">
+              <p class="fsl-photos-title">Galleria fotografica</p>
+              <div class="fsl-photo-slot large">
+                <img src="dublino.jpg" alt="Soggiorno studio Dublino">
+              </div>
+              <div class="fsl-photo-grid">
+                <div class="fsl-photo-slot">
+                  <img src="SKY.jpg" alt="Aula corso inglese">
+                </div>
+                <div class="fsl-photo-slot">
+                  <img src="dublino3.jpeg" alt="Escursione">
+                </div>
+                <div class="fsl-photo-slot">
+                  <img src="foto.jpeg" alt="Gruppo di studenti">
+                </div>
+                <div class="fsl-photo-slot">
+                  <img src="dublino4.jpeg" alt="Attestato">
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ABB BASE -->
+        <article class="fsl-card reveal" style="transition-delay:0.1s">
+          <div class="fsl-card-inner">
+            <div class="fsl-card-text">
+              <div class="fsl-card-num">02</div>
+              <span class="fsl-badge">Certificazione ABB</span>
+              <h3>Corso Base<br>Robotica Industriale ABB</h3>
+
+              <p class="meta">
+                ABB Italia
+                <span class="meta-sep">·</span>
+                Certificazione Base
+                <span class="meta-sep">·</span>
+                A.S. 2024/25
+              </p>
+
+              <p class="desc-p">
+                Primo approccio serio alla robotica industriale. Teoria su come funziona un robot a 6 assi,
+                poi pratica su <strong style="color:var(--white)">RobotStudio</strong> — il simulatore ABB
+                dove costruisci la cella, programmi i movimenti e vedi se il braccio va a sbattere da qualche parte.
+              </p>
+              <p class="desc-p">
+                Ho imparato a configurare work object e tool, a scrivere traiettorie con MoveJ, MoveL e MoveC,
+                e a gestire gli I/O digitali per far "parlare" il robot con altri dispositivi. All'inizio
+                sembrava tutto astratto, poi hai la soddisfazione di vedere il robot che fa esattamente quello che hai scritto.
+              </p>
+              <p class="desc-p">
+                Ho preso la certificazione ufficiale ABB Base. Per chi vuole lavorare nell'automazione
+                in Italia è un biglietto da visita concreto, non solo "ho fatto robotica a scuola".
+              </p>
+
+              <div class="fsl-highlight">
+                <p>
+                  "Prima pensavo ai robot come roba da film. Dopo il corso base li vedo come macchine
+                  con regole precise: sicurezza, precisione, e tanta pazienza nel debug."
+                </p>
+              </div>
+
+              <p class="fsl-skills-label">Cosa ho imparato</p>
+              <div class="fsl-skills">
+                <span class="pill pill-accent">ABB RAPID</span>
+                <span class="pill pill-accent">RobotStudio</span>
+                <span class="pill pill-accent">Celle robotiche</span>
+                <span class="pill pill-accent">I/O digitali</span>
+                <span class="pill pill-accent">Automazione</span>
+                <span class="pill pill-blue">Sicurezza</span>
+              </div>
+            </div>
+
+            <div class="fsl-card-photos">
+              <p class="fsl-photos-title">Galleria fotografica</p>
+              <div class="fsl-photo-slot large">
+                <img src="abb_rob.jpg" alt="Corso ABB Base">
+              </div>
+              <div class="fsl-photo-grid">
+                <div class="fsl-photo-slot">
+                  <img src="Robot1.jpg" alt="Cella robotica">
+                </div>
+                <div class="fsl-photo-slot">
+                  <img src="rapid.png" alt="Codice RAPID">
+                </div>
+                <div class="fsl-photo-slot">
+                  <img src="rob.png" alt="Traiettoria">
+                </div>
+                <div class="fsl-photo-slot">
+                  <img src="certificato1.png" alt="Certificato">
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ABB AVANZATO -->
+        <article class="fsl-card reveal" style="transition-delay:0.2s">
+          <div class="fsl-card-inner">
+            <div class="fsl-card-text">
+              <div class="fsl-card-num">03</div>
+              <span class="fsl-badge">Certificazione Avanzata</span>
+              <h3>Corso Avanzato<br>Robotica Industriale ABB</h3>
+
+              <p class="meta">
+                ABB Italia
+                <span class="meta-sep">·</span>
+                Certificazione Avanzata
+                <span class="meta-sep">·</span>
+                A.S. 2025/26
+              </p>
+
+              <p class="desc-p">
+                Dopo il base, il passo successivo: programmazione strutturata in RAPID con moduli e routine,
+                gestione errori in produzione, integrazione con PLC, tool custom e un assaggio di visione
+                per riconoscere pezzi sul nastro. Roba da linea industriale vera, non solo demo.
+              </p>
+              <p class="desc-p">
+                Ho progettato una cella completa per un pick &amp; place: robot IRB 1200, nastro, stazione di posa,
+                logica per prendere e depositare i pezzi nel modo giusto. Il bello è ottimizzare i tempi di ciclo
+                senza fare mosse pericolose — velocità sì, ma con la testa.
+              </p>
+              <p class="desc-p">
+                Con la certificazione avanzata mi sento più vicino al mondo dell'ingegneria dell'automazione:
+                non solo "faccio muovere il robot", ma penso a come farlo in modo affidabile in fabbrica.
+              </p>
+
+              <div class="fsl-highlight">
+                <p>
+                  "Nel corso avanzato ho smesso di copiare esempi e ho iniziato a progettare la cella
+                  da zero. Quando il ciclo gira liscio, la soddisfazione è enorme."
+                </p>
+              </div>
+
+              <p class="fsl-skills-label">Cosa ho imparato</p>
+              <div class="fsl-skills">
+                <span class="pill pill-accent">RAPID avanzato</span>
+                <span class="pill pill-accent">Pick &amp; Place</span>
+                <span class="pill pill-accent">Integrazione PLC</span>
+                <span class="pill pill-accent">Ottimizzazione cicli</span>
+                <span class="pill pill-blue">Visione base</span>
+                <span class="pill pill-blue">Gestione errori</span>
+              </div>
+            </div>
+
+            <div class="fsl-card-photos">
+              <p class="fsl-photos-title">Galleria fotografica</p>
+              <div class="fsl-photo-slot large">
+                <img src="abb2.jpg" alt="Corso ABB Avanzato">
+              </div>
+              <div class="fsl-photo-grid">
+                <div class="fsl-photo-slot">
+                  <img src="tool.jpeg" alt="Tool custom">
+                </div>
+                <div class="fsl-photo-slot">
+                  <img src="robot5.webp" alt="Nastro trasportatore">
+                </div>
+                <div class="fsl-photo-slot">
+                  <img src="rapid1.png" alt="Codice RAPID avanzato">
+                </div>
+                <div class="fsl-photo-slot">
+                  <img src="cerificato2.png" alt="Certificato Avanzato">
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="sect-header reveal" style="margin-top:5rem;">
+        <span class="sh-tag">Timeline</span>
+        <h2 class="sh-title">Cronologia <span class="t-accent">FSL</span></h2>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="tl-date">A.S. 2024/2025</div>
+          <div class="tl-title">Corso Base ABB Robotica</div>
+          <div class="tl-desc">
+            Prima certificazione in automazione: RAPID, RobotStudio, celle virtuali e I/O.
+            Il punto di partenza per tutto il resto.
+          </div>
+        </div>
+        <div class="timeline-item reveal" style="transition-delay:0.08s">
+          <div class="tl-date">A.S. 2024/2025 · Primavera</div>
+          <div class="tl-title">Soggiorno studio a Dublino</div>
+          <div class="tl-desc">
+            Due settimane di inglese intensivo e vita in un contesto internazionale.
+            Certificazione B1 e tanta pratica reale.
+          </div>
+        </div>
+        <div class="timeline-item reveal" style="transition-delay:0.16s">
+          <div class="tl-date">A.S. 2025/2026</div>
+          <div class="tl-title">Corso Avanzato ABB Robotica</div>
+          <div class="tl-desc">
+            Seconda certificazione: celle industriali complete, pick &amp; place,
+            PLC e ottimizzazione dei cicli produttivi.
+          </div>
+        </div>
+        <div class="timeline-item reveal" style="transition-delay:0.24s">
+          <div class="tl-date">3°–5° anno</div>
+          <div class="tl-title">Progetti tecnici &amp; portfolio</div>
+          <div class="tl-desc">
+            Dal terzo al quinto anno: lavori di laboratorio, elaborato per l'esame
+            e questo sito che raccoglie tutto il percorso.
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-brand">Andrei <span>Vilau</span></div>
+    <div class="footer-copy"> Esame di Maturità 2026</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
